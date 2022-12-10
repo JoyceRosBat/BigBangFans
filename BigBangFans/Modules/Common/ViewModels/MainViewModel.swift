@@ -41,4 +41,8 @@ final class EpisodesViewModel: ObservableObject {
             favorites.list.append(id)
         }
     }
+    
+    func episode(by id: Int) -> Episode? {
+        episodes.first(where: { $0.id == id })
+    }
 }

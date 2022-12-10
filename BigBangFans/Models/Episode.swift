@@ -27,9 +27,7 @@ struct Favorites: Codable {
 }
 
 struct EpisodesData: Codable {
-//    typealias Rating = [(id: Int, rating: Int)]
-//    typealias Notes = [(id: Int, notes: String)]
-    
     var rating: [Int:Int]
     var notes: [Int: String]
 }
+

@@ -23,8 +23,8 @@ final class DetailsViewModel: ObservableObject {
     init(episode: Episode) {
         self.episode = episode
         data = persistence.loadEpisodesData()
-        rating = data.rating.first(where: { $0.key == episode.id })?.value ?? 0
-        notes = data.notes.first(where: { $0.key == episode.id })?.value ?? ""
+        rating = data.rating[episode.id, default: 0]
+        notes = data.notes[episode.id, default: ""]
     }
     
     func save() {

@@ -20,7 +20,7 @@ struct SeasonsView: View {
                         ForEach(season.episodes) { episode in
                             NavigationLink(value: episode) {
                                 content(with: episode)
-                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                         Button {
                                             viewModel.togleFavorite(id: episode.id)
                                         } label: {
