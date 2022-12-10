@@ -10,8 +10,6 @@ import Foundation
 final class EpisodesViewModel: ObservableObject {
     var persistence = ModelPersistence()
     
-    @Published var text = ""
-    @Published var rating = 0
     @Published var episodes: [Episode]
     @Published var favorites: Favorites {
         didSet {

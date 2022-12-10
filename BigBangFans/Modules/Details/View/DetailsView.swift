@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DetailsView: View {
-    @EnvironmentObject var viewModel: EpisodesViewModel
-    var episode: Episode
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var viewModel: DetailsViewModel
     
     var body: some View {
         VStack {
             Spacer(minLength: 16)
             
-            Image(episode.image)
+            Image(viewModel.episode.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 300)
@@ -30,19 +30,19 @@ struct DetailsView: View {
                         
                         HStack {
                             Text("Season:")
-                            Text("\(episode.season)")
+                            Text("\(viewModel.episode.season)")
                         }
                         
                         Spacer(minLength: 16)
                         
                         Text("Title:")
                             .font(.headline)
-                        Text("\(episode.number) - \(episode.name)")
+                        Text("\(viewModel.episode.number) - \(viewModel.episode.name)")
                         
                         Spacer(minLength: 16)
                         Text("Summary:")
                             .font(.headline)
-                        Text("\(episode.summary)")
+                        Text("\(viewModel.episode.summary)")
                     }
                 }
                 
@@ -65,7 +65,7 @@ struct DetailsView: View {
                     HStack(alignment: .top) {
                         Image(systemName: "book")
                         
-                        TextField("Notes", text: $viewModel.text, axis: .vertical)
+                        TextField("Notes", text: $viewModel.notes, axis: .vertical)
                             .lineLimit(8, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
                     }
@@ -81,14 +81,24 @@ struct DetailsView: View {
             }
         }
         .padding()
-        .navigationTitle("Episode \(episode.number) - \(episode.name)")
+        .navigationTitle("Episode \(viewModel.episode.number) - \(viewModel.episode.name)")
         .navigationBarTitleDisplayMode(.inline)
         .scrollIndicators(.hidden)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    viewModel.save()
+                    dismiss()
+                } label: {
+                    Text("Save")
+                }
+            }
+        }
     }
 }
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(episode: .test)
+        DetailsView(viewModel: DetailsViewModel(episode: .test))
     }
 }

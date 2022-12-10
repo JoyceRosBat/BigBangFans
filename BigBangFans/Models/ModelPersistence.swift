@@ -9,7 +9,8 @@ import Foundation
 
 extension URL {
     static let bigBangDataURL = Bundle.main.url(forResource: "BigBang", withExtension: "json")!
-    static let favoritesDocURL = URL.documentsDirectory.appending(component: "favorites").appendingPathExtension("json")
+    static let favoritesURL = URL.documentsDirectory.appending(component: "favorites").appendingPathExtension("json")
+    static let episodesDataUrl = URL.documentsDirectory.appending(component: "episodesData").appendingPathExtension("json")
 }
 
 final class ModelPersistence {
@@ -25,7 +26,7 @@ final class ModelPersistence {
     
     func loadFavorite() -> Favorites {
         do {
-            let data = try Data(contentsOf: .favoritesDocURL)
+            let data = try Data(contentsOf: .favoritesURL)
             return try JSONDecoder().decode(Favorites.self, from: data)
         } catch {
             print("Error en la carga: \(error)")
@@ -38,7 +39,28 @@ final class ModelPersistence {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let data = try encoder.encode(favorites)
-            try data.write(to: .favoritesDocURL, options: [.atomic, .completeFileProtection])
+            try data.write(to: .favoritesURL, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Error al guardar el archivo: \(error)")
+        }
+    }
+    
+    func loadEpisodesData() -> EpisodesData {
+        do {
+            let data = try Data(contentsOf: .episodesDataUrl)
+            return try JSONDecoder().decode(EpisodesData.self, from: data)
+        } catch {
+            print("Error en la carga: \(error)")
+            return EpisodesData(rating: [:], notes: [:])
+        }
+    }
+    
+    func saveEpisodes(data: EpisodesData) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try encoder.encode(data)
+            try data.write(to: .episodesDataUrl, options: [.atomic, .completeFileProtection])
         } catch {
             print("Error al guardar el archivo: \(error)")
         }

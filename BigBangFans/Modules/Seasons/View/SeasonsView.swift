@@ -36,7 +36,7 @@ struct SeasonsView: View {
                 }
             }
             .navigationDestination(for: Episode.self) { episode in
-                DetailsView(episode: episode)
+                DetailsView(viewModel: DetailsViewModel(episode: episode))
             }
             .scrollIndicators(.hidden)
             .navigationTitle("The Big Bang Theory")

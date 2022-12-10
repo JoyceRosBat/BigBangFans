@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391D5DF22945353A00E50A90 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391D5DF12945353A00E50A90 /* DetailsViewModel.swift */; };
 		395D7CF629425EF500841635 /* BigBangFansApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D7CF529425EF500841635 /* BigBangFansApp.swift */; };
 		395D7CF829425EF500841635 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D7CF729425EF500841635 /* SeasonsView.swift */; };
 		395D7CFA29425EF700841635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 395D7CF929425EF700841635 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		391D5DF12945353A00E50A90 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		395D7CF229425EF500841635 /* BigBangFans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigBangFans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		395D7CF529425EF500841635 /* BigBangFansApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBangFansApp.swift; sourceTree = "<group>"; };
 		395D7CF729425EF500841635 /* SeasonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391D5DEE2945351300E50A90 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				391D5DF12945353A00E50A90 /* DetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		395D7CE929425EF500841635 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		396D71302944D08300436E27 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				391D5DEE2945351300E50A90 /* ViewModel */,
 				396D71312944D08900436E27 /* View */,
 			);
 			path = Details;
@@ -299,6 +310,7 @@
 				395D7D14294263BC00841635 /* ModelPersistence.swift in Sources */,
 				396D71352944D0CA00436E27 /* FavoritesView.swift in Sources */,
 				395D7D1C29428CAE00841635 /* ExpandableView.swift in Sources */,
+				391D5DF22945353A00E50A90 /* DetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
