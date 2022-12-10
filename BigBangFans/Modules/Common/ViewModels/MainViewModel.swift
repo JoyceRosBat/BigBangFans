@@ -8,9 +8,16 @@
 import Foundation
 
 final class EpisodesViewModel: ObservableObject {
-    @Published var episodes: [Episode]
     var persistence = ModelPersistence()
-    var favorites: [Int] = []
+    
+    @Published var text = ""
+    @Published var rating = 0
+    @Published var episodes: [Episode]
+    @Published var favorites: Favorites {
+        didSet {
+            persistence.saveFavorite(favorites: favorites)
+        }
+    }
     
     var seasons: [Season] {
         Dictionary(grouping: episodes) { episode in
@@ -22,17 +29,18 @@ final class EpisodesViewModel: ObservableObject {
     
     init() {
         episodes = persistence.fetchEpisodes()
+        favorites = persistence.loadFavorite()
     }
     
     func isFavorite(_ id: Int) -> Bool {
-        favorites.contains(where: { $0 == id })
+        favorites.list.contains(where: { $0 == id })
     }
     
     func togleFavorite(id: Int) {
-        if favorites.contains(where: { $0 == id }) {
-            favorites.removeAll(where: { $0 == id })
+        if favorites.list.contains(where: { $0 == id }) {
+            favorites.list.removeAll(where: { $0 == id })
         } else {
-            favorites.append(id)
+            favorites.list.append(id)
         }
     }
 }

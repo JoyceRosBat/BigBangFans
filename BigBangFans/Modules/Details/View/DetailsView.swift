@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DetailsView: View {
+    @EnvironmentObject var viewModel: EpisodesViewModel
     var episode: Episode
-    @State var text = ""
     
     var body: some View {
         VStack {
@@ -49,9 +49,7 @@ struct DetailsView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Rating:")
                         .font(.headline)
-                    HStack {
-                        Image(systemName: "star")
-                    }
+                    RatingView(rating: $viewModel.rating)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -67,7 +65,7 @@ struct DetailsView: View {
                     HStack(alignment: .top) {
                         Image(systemName: "book")
                         
-                        TextField("Notes", text: $text, axis: .vertical)
+                        TextField("Notes", text: $viewModel.text, axis: .vertical)
                             .lineLimit(8, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
                     }

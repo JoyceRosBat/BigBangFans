@@ -9,6 +9,7 @@ import Foundation
 
 extension URL {
     static let bigBangDataURL = Bundle.main.url(forResource: "BigBang", withExtension: "json")!
+    static let favoritesDocURL = URL.documentsDirectory.appending(component: "favorites").appendingPathExtension("json")
 }
 
 final class ModelPersistence {
@@ -22,4 +23,24 @@ final class ModelPersistence {
         }
     }
     
+    func loadFavorite() -> Favorites {
+        do {
+            let data = try Data(contentsOf: .favoritesDocURL)
+            return try JSONDecoder().decode(Favorites.self, from: data)
+        } catch {
+            print("Error en la carga: \(error)")
+            return Favorites(list: [])
+        }
+    }
+    
+    func saveFavorite(favorites: Favorites) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try encoder.encode(favorites)
+            try data.write(to: .favoritesDocURL, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Error al guardar el archivo: \(error)")
+        }
+    }
 }

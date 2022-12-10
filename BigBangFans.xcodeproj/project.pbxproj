@@ -20,6 +20,7 @@
 		395D7D1E2943C7DE00841635 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D7D1D2943C7DE00841635 /* DetailsView.swift */; };
 		396D71352944D0CA00436E27 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396D71342944D0CA00436E27 /* FavoritesView.swift */; };
 		396D71392944D10900436E27 /* BigBangTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396D71382944D10900436E27 /* BigBangTabView.swift */; };
+		39887FDA2945277000BBD953 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39887FD92945277000BBD953 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		395D7D1D2943C7DE00841635 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		396D71342944D0CA00436E27 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		396D71382944D10900436E27 /* BigBangTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBangTabView.swift; sourceTree = "<group>"; };
+		39887FD92945277000BBD953 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				395D7D1B29428CAE00841635 /* ExpandableView.swift */,
+				39887FD92945277000BBD953 /* RatingView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39887FDA2945277000BBD953 /* RatingView.swift in Sources */,
 				396D71392944D10900436E27 /* BigBangTabView.swift in Sources */,
 				395D7D162942643D00841635 /* MainViewModel.swift in Sources */,
 				395D7CF829425EF500841635 /* SeasonsView.swift in Sources */,
