@@ -9,8 +9,8 @@ import Foundation
 
 final class EpisodesViewModel: ObservableObject {
     @Published var episodes: [Episode]
-    @Published var episodeSelected: Episode = .test
     var persistence = ModelPersistence()
+    var favorites: [Int] = []
     
     var seasons: [Season] {
         Dictionary(grouping: episodes) { episode in
@@ -22,5 +22,17 @@ final class EpisodesViewModel: ObservableObject {
     
     init() {
         episodes = persistence.fetchEpisodes()
+    }
+    
+    func isFavorite(_ id: Int) -> Bool {
+        favorites.contains(where: { $0 == id })
+    }
+    
+    func togleFavorite(id: Int) {
+        if favorites.contains(where: { $0 == id }) {
+            favorites.removeAll(where: { $0 == id })
+        } else {
+            favorites.append(id)
+        }
     }
 }

@@ -20,6 +20,16 @@ struct SeasonsView: View {
                         ForEach(season.episodes) { episode in
                             NavigationLink(value: episode) {
                                 content(with: episode)
+                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        Button {
+                                            viewModel.togleFavorite(id: episode.id)
+                                        } label: {
+                                            viewModel.isFavorite(episode.id) ? Image(systemName: "star.fill")
+                                            : Image(systemName: "star")
+                                        }
+                                        .tint(viewModel.isFavorite(episode.id) ? .yellow : .gray)
+                                        
+                                    }
                             }
                         }
                     }
