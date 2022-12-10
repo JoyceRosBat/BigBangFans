@@ -10,7 +10,7 @@ import SwiftUI
 struct ExpandableView<Header: View, Content: View>: View {
     @State var isExpanded: Bool = false
     
-    var label: () -> Header
+    var header: () -> Header
     var content: () -> Content
     
     var body: some View {
@@ -26,7 +26,7 @@ struct ExpandableView<Header: View, Content: View>: View {
                         }
                     } label: {
                         HStack {
-                            label()
+                            header()
                             
                             Spacer()
                             
@@ -45,7 +45,7 @@ struct ExpandableView_Previews: PreviewProvider {
         List {
             ForEach(0..<5) { index in
                 Section {
-                    ExpandableView(label: {
+                    ExpandableView(header: {
                         Text("Label test")
                     },
                                    content: {

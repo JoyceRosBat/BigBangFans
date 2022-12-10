@@ -10,12 +10,12 @@ import SwiftUI
 struct BigBangTabView: View {
     var body: some View {
         TabView {
-            MainView(viewModel: MainViewModel())
+            SeasonsView()
                 .tabItem {
                     Label ("Seasons", systemImage: "atom")
 
                 }
-            GridView()
+            FavoritesView()
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }

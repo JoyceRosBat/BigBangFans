@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SeasonsView: View {
     @EnvironmentObject var viewModel: EpisodesViewModel
-    @Binding var cover: Bool
-    let namespace:Namespace.ID
     
     var body: some View {
         NavigationStack {
@@ -20,20 +18,16 @@ struct SeasonsView: View {
                         header(with: season.id)
                     } content: {
                         ForEach(season.episodes) { episode in
-//                            NavigationLink(value: episode) {
+                            NavigationLink(value: episode) {
                                 content(with: episode)
-                                .onTapGesture {
-                                    cover = false
-                                    viewModel.select(episode)
-                                }
-//                            }
+                            }
                         }
                     }
                 }
             }
-//            .navigationDestination(for: Episode.self) { episode in
-//                DetailsView(episode: episode)
-//            }
+            .navigationDestination(for: Episode.self) { episode in
+                DetailsView(episode: episode)
+            }
             .scrollIndicators(.hidden)
             .navigationTitle("The Big Bang Theory")
         }
@@ -70,9 +64,9 @@ private extension SeasonsView {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
+struct SeasonsView_Previews: PreviewProvider {
     static var previews: some View {
-        SeasonsView(cover: .constant(false), namespace: Namespace().wrappedValue)
+        SeasonsView()
             .environmentObject(EpisodesViewModel())
     }
 }

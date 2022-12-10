@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct BigBangFansApp: App {
+    @StateObject var viewModel = EpisodesViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BigBangTabView()
+                .environmentObject(viewModel)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  EpisodesViewModel.swift
 //  BigBangFans
 //
 //  Created by Joyce Rosario Batista on 8/12/22.
@@ -7,8 +7,9 @@
 
 import Foundation
 
-final class MainViewModel: ObservableObject {
+final class EpisodesViewModel: ObservableObject {
     @Published var episodes: [Episode]
+    @Published var episodeSelected: Episode = .test
     var persistence = ModelPersistence()
     
     var seasons: [Season] {
