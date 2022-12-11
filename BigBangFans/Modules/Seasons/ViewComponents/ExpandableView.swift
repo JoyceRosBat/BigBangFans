@@ -34,7 +34,6 @@ struct ExpandableView<Header: View, Content: View>: View {
                         }
                     }
                     .buttonStyle(.plain)
-                
             }
         }
     }

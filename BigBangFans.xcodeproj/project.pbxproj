@@ -140,6 +140,7 @@
 		396D712C2944D04400436E27 /* Seasons */ = {
 			isa = PBXGroup;
 			children = (
+				39CB88932946818200D36969 /* ViewComponents */,
 				396D712D2944D05A00436E27 /* View */,
 			);
 			path = Seasons;
@@ -156,6 +157,7 @@
 		396D71302944D08300436E27 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				39CB88922946816F00D36969 /* ViewComponents */,
 				391D5DEE2945351300E50A90 /* ViewModel */,
 				396D71312944D08900436E27 /* View */,
 			);
@@ -205,7 +207,6 @@
 		396D713A2944D28B00436E27 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				396D713C2944D30200436E27 /* ViewComponents */,
 				396D713B2944D29100436E27 /* ViewModels */,
 			);
 			path = Common;
@@ -219,11 +220,18 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		396D713C2944D30200436E27 /* ViewComponents */ = {
+		39CB88922946816F00D36969 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				39887FD92945277000BBD953 /* RatingView.swift */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		39CB88932946818200D36969 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
 				395D7D1B29428CAE00841635 /* ExpandableView.swift */,
-				39887FD92945277000BBD953 /* RatingView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";

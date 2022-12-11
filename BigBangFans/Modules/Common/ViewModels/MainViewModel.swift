@@ -10,6 +10,7 @@ import Foundation
 final class EpisodesViewModel: ObservableObject {
     var persistence = ModelPersistence()
     
+    @Published var searchText: String = ""
     @Published var episodes: [Episode]
     @Published var checks: EpisodesCheck {
         didSet {
@@ -17,8 +18,12 @@ final class EpisodesViewModel: ObservableObject {
         }
     }
     
+    var filteredEpisodes: [Episode] {
+        searchText.isEmpty ? episodes : episodes.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+    }
+    
     var seasons: [Season] {
-        Dictionary(grouping: episodes) { episode in
+        Dictionary(grouping: filteredEpisodes) { episode in
             episode.season
         }.values.sorted {
             $0.first?.season ?? 0 < $1.first?.season ?? 0

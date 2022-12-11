@@ -51,6 +51,7 @@ struct SeasonsView: View {
             }
             .scrollIndicators(.hidden)
             .navigationTitle("The Big Bang Theory")
+            .searchable(text: $viewModel.searchText)
         }
     }
 }
