@@ -9,7 +9,7 @@ import Foundation
 
 extension URL {
     static let bigBangDataURL = Bundle.main.url(forResource: "BigBang", withExtension: "json")!
-    static let favoritesURL = URL.documentsDirectory.appending(component: "favorites").appendingPathExtension("json")
+    static let checksURL = URL.documentsDirectory.appending(component: "checks").appendingPathExtension("json")
     static let episodesDataUrl = URL.documentsDirectory.appending(component: "episodesData").appendingPathExtension("json")
 }
 
@@ -24,22 +24,22 @@ final class ModelPersistence {
         }
     }
     
-    func loadFavorite() -> Favorites {
+    func loadChecks() -> EpisodesCheck {
         do {
-            let data = try Data(contentsOf: .favoritesURL)
-            return try JSONDecoder().decode(Favorites.self, from: data)
+            let data = try Data(contentsOf: .checksURL)
+            return try JSONDecoder().decode(EpisodesCheck.self, from: data)
         } catch {
             print("Error en la carga: \(error)")
-            return Favorites(list: [])
+            return EpisodesCheck(favorites: [], seen: [], seasonSeen: [])
         }
     }
     
-    func saveFavorite(favorites: Favorites) {
+    func saveChecks(checks: EpisodesCheck) {
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
-            let data = try encoder.encode(favorites)
-            try data.write(to: .favoritesURL, options: [.atomic, .completeFileProtection])
+            let data = try encoder.encode(checks)
+            try data.write(to: .checksURL, options: [.atomic, .completeFileProtection])
         } catch {
             print("Error al guardar el archivo: \(error)")
         }

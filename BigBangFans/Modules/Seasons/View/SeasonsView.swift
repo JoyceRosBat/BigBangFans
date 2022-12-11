@@ -20,7 +20,8 @@ struct SeasonsView: View {
                         ForEach(season.episodes) { episode in
                             NavigationLink(value: episode) {
                                 content(with: episode)
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    .swipeActions(edge: .trailing,
+                                                  allowsFullSwipe: true) {
                                         Button {
                                             viewModel.togleFavorite(id: episode.id)
                                         } label: {
@@ -28,7 +29,17 @@ struct SeasonsView: View {
                                             : Image(systemName: "star")
                                         }
                                         .tint(viewModel.isFavorite(episode.id) ? .yellow : .gray)
+                                    }
+                                    .swipeActions(edge: .leading,
+                                                  allowsFullSwipe: true) {
                                         
+                                        Button {
+                                            viewModel.togleSeen(id: episode.id)
+                                        } label: {
+                                            viewModel.isSeen(episode.id) ? Image(systemName: "eye.slash")
+                                            : Image(systemName: "eye")
+                                        }
+                                        .tint(viewModel.isSeen(episode.id) ? .cyan : .gray)
                                     }
                             }
                         }
@@ -50,11 +61,19 @@ private extension SeasonsView {
             Image("season\(id)")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150)
+                .frame(width: 140)
                 .cornerRadius(10)
             
             Text("Season \(id)")
                 .font(.title2)
+            
+            Button {
+                viewModel.togleSeasonSeen(id: id, updateEpisodes: true)
+            } label: {
+                viewModel.isSeasonSeen(id) ? Image(systemName: "eye.slash")
+                : Image(systemName: "eye")
+            }
+            .tint(viewModel.isSeasonSeen(id) ? .cyan : .gray)
         }
     }
     
@@ -70,6 +89,24 @@ private extension SeasonsView {
                 .font(.body)
             
             Spacer()
+            
+            if viewModel.isSeen(episode.id) {
+                Image(systemName: "eye.slash")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.gray.opacity(0.5))
+                    .scaledToFit()
+                    .frame(width: 15)
+            }
+            
+            if viewModel.isFavorite(episode.id) {
+                Image(systemName: "star.fill")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.gray.opacity(0.4))
+                    .scaledToFit()
+                    .frame(width: 15)
+            }
         }
     }
 }

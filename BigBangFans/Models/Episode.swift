@@ -22,12 +22,14 @@ struct Episode: Codable, Identifiable, Hashable {
     }
 }
 
-struct Favorites: Codable {
-    var list: [Int]
+struct EpisodesCheck: Codable {
+    var favorites: [Int]
+    var seen: [Int]
+    var seasonSeen: [Int]
 }
 
 struct EpisodesData: Codable {
-    var rating: [Int:Int]
+    var rating: [Int: Int]
     var notes: [Int: String]
 }
 

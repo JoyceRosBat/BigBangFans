@@ -11,15 +11,14 @@ struct FavoritesView: View {
     @EnvironmentObject var viewModel: EpisodesViewModel
     
     var body: some View {
-        if viewModel.favorites.list.isEmpty {
+        if viewModel.checks.favorites.isEmpty {
             Text("Add favorite episodes by *swiping*\nto the left in the episodes list")
                 .multilineTextAlignment(.center)
                 .bold()
         } else {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]){
-                    ForEach(viewModel.favorites.list, id: \.self) { favoriteId in
-                        
+                    ForEach(viewModel.checks.favorites, id: \.self) { favoriteId in
                         if let episode = viewModel.episode(by: favoriteId) {
                             cover(of: episode)
                                 .contextMenu {
@@ -30,7 +29,6 @@ struct FavoritesView: View {
                                     }
                                     
                                 }
-                            
                         }
                     }
                 }
