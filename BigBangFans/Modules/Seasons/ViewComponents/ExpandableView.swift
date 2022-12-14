@@ -30,7 +30,9 @@ struct ExpandableView<Header: View, Content: View>: View {
                             
                             Spacer()
                             
-                            isExpanded ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down")
+                            Image(systemName: "chevron.up")
+                                .rotationEffect(.degrees(isExpanded ? 180 : 360))
+                                .animation(Animation.easeInOut(duration: 0.2), value: isExpanded)
                         }
                     }
                     .buttonStyle(.plain)
