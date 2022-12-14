@@ -20,36 +20,55 @@ struct FavoritesView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]){
                     ForEach(viewModel.checks.favorites, id: \.self) { favoriteId in
                         if let episode = viewModel.episode(by: favoriteId) {
-                            cover(of: episode)
-                                .contextMenu {
-                                    Button(role: .destructive) {
-                                        withAnimation { viewModel.togleFavorite(id: favoriteId) }
-                                    } label: {
-                                        Label("Remove from favorites", systemImage: "trash")
+                            NavigationLink(value: episode) {
+                                cover(of: episode)
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            withAnimation { viewModel.togleFavorite(id: favoriteId) }
+                                        } label: {
+                                            Label("Remove from favorites", systemImage: "trash")
+                                        }
                                     }
-                                    
-                                }
+                            }
                         }
                     }
                 }
                 .padding()
             }
+            .navigationDestination(for: Episode.self) { episode in
+                DetailsView(viewModel: DetailsViewModel(episode: episode))
+            }
+            .scrollIndicators(.hidden)
+            .navigationTitle("Favorites")
         }
     }
 }
 
 extension FavoritesView {
     func cover(of episode: Episode) -> some View {
-        Image("\(episode.image)")
-            .resizable()
-            .scaledToFit()
-            .cornerRadius(10)
+        ZStack(alignment: .topLeading) {
+            Image("\(episode.image)")
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(10)
+            
+            Image(systemName: "star.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
+                .foregroundColor(.yellow.opacity(0.7))
+                .shadow(color: .black, radius: 0.3)
+                .padding(.leading, 5)
+                .padding(.top, 5)
+        }
     }
 }
 
 struct GridView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView()
-            .environmentObject(EpisodesViewModel())
+        NavigationStack {
+            FavoritesView()
+                .environmentObject(EpisodesViewModel())
+        }
     }
 }

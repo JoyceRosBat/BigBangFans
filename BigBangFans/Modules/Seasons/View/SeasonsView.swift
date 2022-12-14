@@ -11,48 +11,45 @@ struct SeasonsView: View {
     @EnvironmentObject var viewModel: EpisodesViewModel
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(viewModel.seasons) { season in
-                    ExpandableView {
-                        header(with: season.id)
-                    } content: {
-                        ForEach(season.episodes) { episode in
-                            NavigationLink(value: episode) {
-                                content(with: episode)
-                                    .swipeActions(edge: .trailing,
-                                                  allowsFullSwipe: true) {
-                                        Button {
-                                            viewModel.togleFavorite(id: episode.id)
-                                        } label: {
-                                            viewModel.isFavorite(episode.id) ? Image(systemName: "star.fill")
-                                            : Image(systemName: "star")
-                                        }
-                                        .tint(viewModel.isFavorite(episode.id) ? .yellow : .gray)
+        List {
+            ForEach(viewModel.seasons) { season in
+                ExpandableView {
+                    header(with: season.id)
+                } content: {
+                    ForEach(season.episodes) { episode in
+                        NavigationLink(value: episode) {
+                            content(with: episode)
+                                .swipeActions(edge: .trailing,
+                                              allowsFullSwipe: true) {
+                                    Button {
+                                        viewModel.togleFavorite(id: episode.id)
+                                    } label: {
+                                        viewModel.isFavorite(episode.id) ? Image(systemName: "star.fill")
+                                        : Image(systemName: "star")
                                     }
-                                    .swipeActions(edge: .leading,
-                                                  allowsFullSwipe: true) {
-                                        
-                                        Button {
-                                            viewModel.togleSeen(id: episode.id)
-                                        } label: {
-                                            viewModel.isSeen(episode.id) ? Image(systemName: "eye.slash")
-                                            : Image(systemName: "eye")
-                                        }
-                                        .tint(viewModel.isSeen(episode.id) ? .cyan : .gray)
+                                    .tint(viewModel.isFavorite(episode.id) ? .yellow : .gray)
+                                }
+                                .swipeActions(edge: .leading,
+                                              allowsFullSwipe: true) {
+                                    Button {
+                                        viewModel.togleSeen(id: episode.id)
+                                    } label: {
+                                        viewModel.isSeen(episode.id) ? Image(systemName: "eye.slash")
+                                                      : Image(systemName: "eye")
                                     }
-                            }
+                                    .tint(viewModel.isSeen(episode.id) ? .cyan : .gray)
+                                }
                         }
                     }
                 }
             }
-            .navigationDestination(for: Episode.self) { episode in
-                DetailsView(viewModel: DetailsViewModel(episode: episode))
-            }
-            .scrollIndicators(.hidden)
-            .navigationTitle("The Big Bang Theory")
-            .searchable(text: $viewModel.searchText)
         }
+        .navigationDestination(for: Episode.self) { episode in
+            DetailsView(viewModel: DetailsViewModel(episode: episode))
+        }
+        .scrollIndicators(.hidden)
+        .navigationTitle("The Big Bang Theory")
+        .searchable(text: $viewModel.searchText)
     }
 }
 

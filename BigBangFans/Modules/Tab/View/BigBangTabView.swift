@@ -10,15 +10,19 @@ import SwiftUI
 struct BigBangTabView: View {
     var body: some View {
         TabView {
-            SeasonsView()
-                .tabItem {
-                    Label ("Seasons", systemImage: "atom")
-
-                }
-            FavoritesView()
-                .tabItem {
-                    Label("Favorites", systemImage: "star")
-                }
+            NavigationStack {
+                SeasonsView()
+            }
+            .tabItem {
+                Label ("Seasons", systemImage: "atom")
+                
+            }
+            NavigationStack {
+                FavoritesView()
+            }
+            .tabItem {
+                Label("Favorites", systemImage: "star")
+            }
         }
     }
 }
