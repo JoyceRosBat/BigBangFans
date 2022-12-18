@@ -8,24 +8,28 @@
 import SwiftUI
 
 struct DetailsView: View {
+    enum FocusedField: Hashable {
+        case notes
+    }
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: DetailsViewModel
+    @FocusState private var focusedField: FocusedField?
     
     var body: some View {
-        VStack {
-            Spacer(minLength: 16)
-            
-            Image(viewModel.episode.image)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-            
-            Spacer(minLength: 32)
-            
+        ScrollViewReader { proxy in
             ScrollView {
                 VStack {
+                    Spacer(minLength: 16)
+                    
+                    Image(viewModel.episode.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                    
+                    Spacer(minLength: 32)
+                    
                     VStack(alignment: .leading) {
                         
                         HStack {
@@ -68,6 +72,8 @@ struct DetailsView: View {
                         TextField("Notes", text: $viewModel.notes, axis: .vertical)
                             .lineLimit(8, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
+                            .focused($focusedField, equals: .notes)
+                            .ignoresSafeArea(.keyboard)
                     }
                 }
                 .padding()
@@ -75,6 +81,9 @@ struct DetailsView: View {
                     Rectangle()
                         .fill(.black.opacity(0.1))
                         .cornerRadius(10)
+                }
+                .onChange(of: focusedField) { newValue in
+                    proxy.scrollTo(newValue)
                 }
                 
                 Spacer()
@@ -93,6 +102,9 @@ struct DetailsView: View {
                     Text("Save")
                 }
             }
+        }
+        .onTapGesture {
+            focusedField = nil
         }
     }
 }
